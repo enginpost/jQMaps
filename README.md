@@ -159,3 +159,4 @@ And custom markers let you specify specific pin graphics on a marker-by-marker b
 ```XML
 <marker lat='40.349937' lng='-74.663156' type='custom' icon='custom.png' shadow=''>
 ```
+*Make note that the shadow attribute is always optional.*
