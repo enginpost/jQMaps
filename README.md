@@ -106,7 +106,7 @@ Pre-configured markers are the marker types your setup in your jQMaps XML. The i
 
 Example marker type setup in jQMaps XML:
 
-'''XML
+```XML
 <jqmap>
   <config>
     <map zoom='fit' center_lat='40.348637' center_lng='-74.658365' width='1200' height='550' />
@@ -118,11 +118,11 @@ Example marker type setup in jQMaps XML:
   </config>
   <markers>...</markers>
 </jqmap>
-'''
+```
 The &lt;pins&gt; nodes setup your marker types. First, you can set the pins to animate on click by setting animate="true". Then you list your individual pins. The name attribute is the type of marker you can apply to your markers list items later. The icon is the pin art, and you can optionally specify the art for a pin shadow. This gets turned into you custom marker art by jQMaps and the Google Maps API.
 
 Now you need to apply these marker types to a marker:
-'''XML
+```XML
 <markers>
   <marker lat='40.349937' lng='-74.663156' type='office'>
     <marker_data>
@@ -136,26 +136,26 @@ Now you need to apply these marker types to a marker:
     </marker_data>
   </marker>
 </markers>
-'''
+```
 In the &lt;markers&gt; child nodes you create a new &lt;marker&gt; node and set it's "type" attribute to an above pin "name" which tells jQMaps to use that art for this marker. 
 
 ####Numeric markers
 
 Numeric markers are creates by the Google Charts API. In this case the syntax for setting up a Numeric marker changes.
-'''XML
+```XML
 <marker lat='40.346282' lng='-74.653108' type='number' icon='.9|0|FA7F00|11|b|180'>
-'''
+```
 Setting the attribute "type" to "number" you are telling jQMaps to use the charts dynamic pin art rendering. The "icon" attribute needs to contain a specific list of pipe-delimited values to set the look and value of the numeric marker:
 
-'''
+```
 <scale_factor>|<rotation_deg>|<fill_color>|<font_size>|<font_style>|<text_line_1>|...|<text_line_5>
-'''
+```
 The value of the marker is not constrained to being a numeric value. You can read more about the [chart dynamic makers](https://developers.google.com/chart/image/docs/gallery/dynamic_icons).
 
 ####Custom markers
 
 And custom markers let you specify specific pin graphics on a marker-by-marker basis.
 
-'''XML
+```XML
 <marker lat='40.349937' lng='-74.663156' type='custom' icon='custom.png' shadow=''>
-'''
+```
