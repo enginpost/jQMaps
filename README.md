@@ -18,7 +18,7 @@ So far I have tested the plugin and it works under all recent copies of FireFox,
 -------------------
 ##Contents
 
-- [jQMaps.js](jQMaps.js "click to see jQMaps.js file): The plugin where all of the action happens.
+- [jQMaps.js](jQMaps.js): The plugin where all of the action happens.
 - Example folder: This is an example which demonstrates all of the current features.
   - index.html: Sample HTML file showing how to use jQMaps.
   - my-map.xml: Demonstrates the expected XML jQMaps needs to create your Google Map plugin
