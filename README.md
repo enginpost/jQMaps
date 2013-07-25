@@ -53,7 +53,7 @@ To quickly get started with jQMaps you have three things to do:
   </head>
 ```
 
-###Edit your jQMaps.xml file to setup your markers and marker data
+###Edit your jQMaps XML file to setup your markers and marker data
 ```
 <jqmap>
   <config>
