@@ -20,6 +20,6 @@ CONTENTS
 
 - jQMaps.js: The plugin where all of the action happens.
 - Example folder: This is an example which demonstrates all of the current features.
--- index.html: Sample HTML file showing how to use jQMaps.
--- my-map.xml: Demonstrates the expected XML jQMaps needs to create your Google Map plugin
--- *.PNG: The PNG files demonstrate both the ability to setup preconfigured marker pinTypes, custom markers as well as dynamic markers.
+  - index.html: Sample HTML file showing how to use jQMaps.
+  - my-map.xml: Demonstrates the expected XML jQMaps needs to create your Google Map plugin
+  - *.PNG: The PNG files demonstrate both the ability to setup preconfigured marker pinTypes, custom markers as well as dynamic markers.
