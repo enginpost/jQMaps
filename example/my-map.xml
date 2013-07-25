@@ -1,0 +1,53 @@
+<jqmap>
+  <config>
+    <map zoom='fit' center_lat='40.348637' center_lng='-74.658365' width='1200' height='550' />
+    <pins animate='true'>
+      <pin name='office' icon='office.png' shadow='' />
+      <pin name='school' icon='school.png' shadow='' />
+      <pin name='sports' icon='sports.png' shadow='' />
+    </pins>
+  </config>
+  <markers>
+    <marker lat='40.349937' lng='-74.663156' type='custom' icon='custom.png' shadow=''>
+      <marker_data>
+        <title><![CDATA[Office of Communications]]></title>
+        <description>
+          <![CDATA[
+          22 Chambers Street<br/>
+          Princeton, NJ 08540
+          ]]>
+        </description>
+      </marker_data>
+    </marker>
+    <marker lat='40.348907' lng='-74.659342' type='school'>
+      <marker_data>
+        <title><![CDATA[Nassau Hall]]></title>
+        <description>
+          <![CDATA[
+          Oldest building at Princeton University.
+          ]]>
+        </description>
+      </marker_data>
+    </marker>
+    <marker lat='40.346282' lng='-74.653108' type='number' icon='.9|0|FA7F00|11|b|180'>
+      <marker_data>
+        <title><![CDATA[Lewis Library]]></title>
+        <description>
+          <![CDATA[
+          Lewis Library on the Princeton University campus.
+          ]]>
+        </description>
+      </marker_data>
+    </marker>
+    <marker lat='40.342701' lng='-74.653645' type='sports'>
+      <marker_data>
+        <title><![CDATA[Roberts Stadium]]></title>
+        <description>
+          <![CDATA[
+          Sports venue on the south end of the University campus.
+          ]]>
+        </description>
+      </marker_data>
+    </marker>
+  </markers>
+</jqmap>
