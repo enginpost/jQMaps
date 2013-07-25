@@ -29,7 +29,7 @@ So far I have tested the plugin and it works under all recent copies of FireFox,
 To quickly get started with jQMaps you have three things to do:
 
 ###Add jQuery, Google Maps API and jQMaps scripts to the head of your document
-'''
+```
 <html>
   <head>
     <meta charset=utf-8>
@@ -39,10 +39,10 @@ To quickly get started with jQMaps you have three things to do:
     <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false&v=3&libraries=geometry"></script>
     <script type="text/javascript" src="../jqmaps.js"></script>
   </head>
-'''
+```
 
 ###Edit your jQMaps.xml file to setup your markers and marker data
-'''
+```
 <jqmap>
   <config>
     <map zoom='fit' center_lat='40.348637' center_lng='-74.658365' width='1200' height='550' />
@@ -59,11 +59,11 @@ To quickly get started with jQMaps you have three things to do:
     </marker>
   </marker>
 </jqmap>
-'''
+```
 You can create any XML nodes you need under <marker_data> but the nodes cannot have attributes. This simple format makes it easy for jQMaps to later convert that XML to JSON and attach it to the marker click event. And be sure that your pre-configured marker graphics exist.
 
 ###Add a DIV to the HTML on the page and use jQMaps to build the Google Map embed using your XML file.
-'''
+```
 <div id="myMap"></div>
 <div id="mapMessage">
   <h2 id="title"></h2>
@@ -78,5 +78,5 @@ You can create any XML nodes you need under <marker_data> but the nodes cannot h
     jQuery('#mapMessage #description').html(this.marker_data.description);
   }
 </script>
-'''
+```
 In the above example, A google map would be loaded with a single marker and when the visitor clicks the marker the local function "marker_onClick" would be called and the marker_data attached to the marker would update the map message area of the screen using jQuery.
