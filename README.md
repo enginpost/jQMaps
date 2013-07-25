@@ -1,17 +1,27 @@
 jQMaps
 ====================
 
-A plugin for jQuery useful in creating a Google Map embed managing
+A plugin for jQuery useful in creating Google Map embeds by managing
 the configuration of map markers and custom marker pins in XML.
 
 -------------------
 ##Why another jQuery Google Maps API plugin
 
-While the *Google Maps API* is powerful and embedding it is not too difficult, I wanted a quicker way to setup interactive markers and affiliate a marker with a lot of custom data so I could build non-map overlays more complex than a simple bubble.
+Here was my use-case:
 
-XML seemed to be a good way to setup both the map configuration as well as the marker data. But when it is time to respond to marker click events, I wanted a simple way to get access to data from the XML associated with that marker. The jQMaps plugin lets you specify a callback function and converts simple attributeless node-ony XML data into JSON attached to the marker as it is passed to the callback. This makes it incredibly simple to test and use data values associated with the marker and create custom DOM animations and presentations of data above or outside of the Google Map.
+- [x] A quick self-inclusive portable way to configure a google map embed (XML makes that easy).
+- [x] To create a set of reusable pre-configured marker pins that I could assign to the markers on my map (XML).
+- [x] To have completely custom marker-by-marker pin art (XML).
+- [x] A simple process for connecting all of my pins to a single javascript function (jQuery helps here).
+- [x] To make use of the XML data to extend the data passed to a marker click event so I could do more dramatic things than simply show some HTML in a Google Maps Embed info bubble. 
 
-In addition to embed configuration, marker data and callback management for markers, jQMaps also lets you pre-configure and reference marker art. The XML file can pre-configure an innumerable set of marker styles and looks and you can associated those pre-configured marker types. In addition to that each marker can also specify custom marker art or make use of the google charts dynamic number marker (which allows you to set a number of attributes including a numeric value within the marker, and Google Charts creates that for you).
+And I have other goals:
+
+- [ ] To make the callback function optional, for a non-interactive map.
+- [ ] To allow markers to specify their address as a traditional address and not latitude and longitude.
+- [ ] To optionally print out latitude and longitude info to the browser console if the marker initially specified a traditional address (so site authors can update their markers with correct lat and long info rather than take the time to have jQMaps look it up on each page render).
+- [ ] To optionally add "distance from map center" information to a marker's &lt;marker_data&gt; for the click event.
+- [ ] To add attribute to JSON conversion for &lt;marker_data&gt; in the XML (right now marker data is node-only).
 
 So far I have tested the plugin and it works under all recent copies of FireFox, Chrome, Safari and IE 6 through 10.
 
@@ -20,9 +30,11 @@ So far I have tested the plugin and it works under all recent copies of FireFox,
 
 - [jQMaps.js](jQMaps.js): The plugin where all of the action happens.
 - Example folder: This is an example which demonstrates all of the current features.
-  - index.html: Sample HTML file showing how to use jQMaps.
-  - my-map.xml: Demonstrates the expected XML jQMaps needs to create your Google Map plugin
+  - [index.html](example/index.html): Sample HTML file showing how to use jQMaps.
+  - [my-map.xml](example/my-map.xml): Demonstrates the expected XML jQMaps needs to create your Google Map plugin
   - *.PNG: The PNG files demonstrate both the ability to setup preconfigured marker pinTypes, custom markers as well as dynamic markers.
+
+*The example references both JQuery and the Google Maps API through their respective CDNs.*
 
 -------------------
 ##Getting started
