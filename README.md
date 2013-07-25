@@ -150,7 +150,7 @@ Setting the attribute "type" to "number" you are telling jQMaps to use the chart
 ```
 <scale_factor>|<rotation_deg>|<fill_color>|<font_size>|<font_style>|<text_line_1>|...|<text_line_5>
 ```
-The value of the marker is not constrained to being a numeric value. You can read more about the [chart dynamic makers](https://developers.google.com/chart/image/docs/gallery/dynamic_icons).
+The value of the marker is not constrained to being a numeric value. You can read more about the [chart dynamic icons](https://developers.google.com/chart/image/docs/gallery/dynamic_icons).
 
 ####Custom markers
 
