@@ -72,7 +72,7 @@ To quickly get started with jQMaps you have three things to do:
   </marker>
 </jqmap>
 ```
-You can create any XML nodes you need under &lt;marker_data&gt; but the nodes cannot have attributes. This simple format makes it easy for jQMaps to later convert that XML to JSON and attach it to the marker click event. Save this file as "my-map.xml". And be sure that your pre-configured marker graphics exist.
+You can create any XML nodes you need under &lt;marker_data&gt; but the nodes cannot have attributes. This simple format makes it easy for jQMaps to later convert that XML to JSON and attach it to the marker click event. Save this file as "my-map.xml". And be sure that your pre-configured marker graphics exist. Also note that the &lt;marker_data&gt; child nodes are all wrapped in CDATA comments. This ensures that any included HTML doesn't break your XML file.
 
 ###Add a DIV to the HTML on the page and use jQMaps to build the Google Map embed using your XML file.
 ```HTML
