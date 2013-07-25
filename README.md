@@ -60,23 +60,25 @@ To quickly get started with jQMaps you have three things to do:
   </marker>
 </jqmap>
 ```
-You can create any XML nodes you need under &lt;marker_data&gt; but the nodes cannot have attributes. This simple format makes it easy for jQMaps to later convert that XML to JSON and attach it to the marker click event. And be sure that your pre-configured marker graphics exist.
+You can create any XML nodes you need under &lt;marker_data&gt; but the nodes cannot have attributes. This simple format makes it easy for jQMaps to later convert that XML to JSON and attach it to the marker click event. Save this file as "my-map.xml". And be sure that your pre-configured marker graphics exist.
 
 ###Add a DIV to the HTML on the page and use jQMaps to build the Google Map embed using your XML file.
 ```
-<div id="myMap"></div>
-<div id="mapMessage">
-  <h2 id="title"></h2>
-  <p id="description"></p>
-</div>
-<script type="text/javascript">
-  jQuery(document).ready(function(){
-    jQuery('#myMap').buildGoogleMap('my-map.xml', marker_onClick );
-  });
-  function marker_onClick(){
-    jQuery('#mapMessage #title').html(this.marker_data.title);
-    jQuery('#mapMessage #description').html(this.marker_data.description);
-  }
-</script>
+<body>
+  <div id="myMap"></div>
+  <div id="mapMessage">
+    <h2 id="title"></h2>
+    <p id="description"></p>
+  </div>
+  <script type="text/javascript">
+    jQuery(document).ready(function(){
+      jQuery('#myMap').buildGoogleMap('my-map.xml', marker_onClick );
+    });
+    function marker_onClick(){
+      jQuery('#mapMessage #title').html(this.marker_data.title);
+      jQuery('#mapMessage #description').html(this.marker_data.description);
+    }
+  </script>
+</body>
 ```
 In the above example, A google map would be loaded with a single marker and when the visitor clicks the marker the local function "marker_onClick" would be called and the marker_data attached to the marker would update the map message area of the screen using jQuery.
