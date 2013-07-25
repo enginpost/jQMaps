@@ -41,7 +41,7 @@ So far I have tested the plugin and it works under all recent copies of FireFox,
 To quickly get started with jQMaps you have three things to do:
 
 ###Add jQuery, Google Maps API and jQMaps scripts to the head of your document
-```
+```HTML
 <html>
   <head>
     <meta charset=utf-8>
@@ -54,7 +54,7 @@ To quickly get started with jQMaps you have three things to do:
 ```
 
 ###Edit your jQMaps XML file to setup your markers and marker data
-```
+```XML
 <jqmap>
   <config>
     <map zoom='fit' center_lat='40.348637' center_lng='-74.658365' width='1200' height='550' />
@@ -75,7 +75,7 @@ To quickly get started with jQMaps you have three things to do:
 You can create any XML nodes you need under &lt;marker_data&gt; but the nodes cannot have attributes. This simple format makes it easy for jQMaps to later convert that XML to JSON and attach it to the marker click event. Save this file as "my-map.xml". And be sure that your pre-configured marker graphics exist.
 
 ###Add a DIV to the HTML on the page and use jQMaps to build the Google Map embed using your XML file.
-```
+```HTML
 <body>
   <div id="myMap"></div>
   <div id="mapMessage">
