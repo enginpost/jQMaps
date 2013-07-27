@@ -13,7 +13,7 @@ Here was my use-case:
 - [x] To create a set of reusable pre-configured marker pins that I could assign to the markers on my map (XML).
 - [x] To have completely custom marker-by-marker pin art (XML).
 - [x] A simple process for connecting all of my pins to a single javascript function (jQuery helps here).
-- [x] To make use of the XML data to extend the data passed to a marker click event so I could do more dramatic things than simply show some HTML in a Google Maps Embed info bubble. 
+- [x] To make use of the XML data to extend the data passed to a marker click event so I could do more dramatic things than simply show some HTML in a Google Maps Embed info bubble.
 
 And I have other goals:
 
@@ -28,10 +28,10 @@ So far I have tested the plugin and it works under all recent copies of FireFox,
 -------------------
 ##Contents
 
-- [jQMaps.js](jQMaps.js): The plugin where all of the action happens.
+- jQMaps.js: The plugin where all of the action happens.
 - Example folder: This is an example which demonstrates all of the current features.
-  - [index.html](example/index.html): Sample HTML file showing how to use jQMaps.
-  - [my-map.xml](example/my-map.xml): Demonstrates the expected XML jQMaps needs to create your Google Map plugin
+  - index.html: Sample HTML file showing how to use jQMaps.
+  - my-map.xml: Demonstrates the expected XML jQMaps needs to create your Google Map plugin
   - *.PNG: The PNG files demonstrate both the ability to setup preconfigured marker pinTypes, custom markers as well as dynamic markers.
 
 *The example references both JQuery and the Google Maps API through their respective CDNs.*
@@ -137,7 +137,7 @@ Now you need to apply these marker types to a marker:
   </marker>
 </markers>
 ```
-In the &lt;markers&gt; child nodes you create a new &lt;marker&gt; node and set it's "type" attribute to an above pin "name" which tells jQMaps to use that art for this marker. 
+In the &lt;markers&gt; child nodes you create a new &lt;marker&gt; node and set it's "type" attribute to an above pin "name" which tells jQMaps to use that art for this marker.
 
 ####Numeric markers
 
