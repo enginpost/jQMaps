@@ -202,6 +202,7 @@ First, visit the google maps wizard (which takes a while to load) and learn how 
 ```
 
 - Pass the optional Style and style name parameters to jQMaps
+
 Now that you have your style setup, pass it to the "buildGoogleMaps" function:
 ```Javascript
 jQuery('#myMap').buildGoogleMap('my-map.xml', true, marker_onClick, myMapStyle, styleName );
