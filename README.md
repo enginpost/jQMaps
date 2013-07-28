@@ -102,7 +102,7 @@ In the above example a google map would be loaded with a single marker and when 
 
 There are two ways to specify the location of your marker:
 
-#####Marker location by latitude and logitude
+#####Marker location by latitude and longitude
 
 Using google maps and a number of other sources you can determine the latitude and longitude for a marker you want to place on a map. 
 ```XML
