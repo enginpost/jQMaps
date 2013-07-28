@@ -193,7 +193,8 @@ And custom markers let you specify specific pin graphics on a marker-by-marker b
 The final two optional parameters of the "buildGoogleMap" function allow you to create a custom aesthetic look for the embedded Google map. The two steps of creating and setting up your custom map look are:
 
 ####Google styled maps wizard
-(http://gmaps-samples-v3.googlecode.com/svn/trunk/styledmaps/wizard/index.html)
+[The Google Map Style Wizard](http://gmaps-samples-v3.googlecode.com/svn/trunk/styledmaps/wizard/index.html)
+
 First, visit the google maps wizard (which takes a while to load) and learn how to fiddle with different maps layer looks. Once you have a look you prefer, click the "Show JSON" button under Map Styles in the right panel and copy that into a variable in your Web page along with a variable to hold the name of your map style.
 ```Javascript
   var myMapStyle = [ { "featureType": "landscape", "stylers": [ { "visibility": "on" }, { "weight": 0.1 }, { "saturation": 200 }, { "hue": "#ffaa00" } ] },{ "featureType": "water", "stylers": [ { "hue": "#00bbff" }, { "lightness": 30 }, { "gamma": 0.6 } ] } ];
