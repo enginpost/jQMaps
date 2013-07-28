@@ -85,7 +85,7 @@ You can create any XML nodes you need under &lt;marker_data&gt; but the nodes ca
   </div>
   <script type="text/javascript">
     jQuery(document).ready(function(){
-      jQuery('#myMap').buildGoogleMap('my-map.xml', marker_onClick );
+      jQuery('#myMap').buildGoogleMap('my-map.xml', false, marker_onClick );
     });
     function marker_onClick(){
       jQuery('#mapMessage #title').html(this.marker_data.title);
@@ -98,9 +98,35 @@ In the above example a google map would be loaded with a single marker and when 
 
 ###Other features: Marker options
 
+####Marker location
+
+There are two ways to specify the location of your marker:
+
+#####Marker location by latitude and logitude
+
+Using google maps and a number of other sources you can determine the latitude and longitude for a marker you want to place on a map. 
+```XML
+<marker lat='40.346282' lng='-74.653108' ... >
+```
+Adding 'lat' and 'lng' attributes with their values lets jQMaps pot your pin by that location.
+
+#####Marker location by fuzzy address
+
+You can also use a specific (i.e. "1600 Pennsylvania Ave, Washington, D.C. 20006") or general ("Japan") address and jQMaps will make use of Google Maps geocoder to find the latitude and longitude of that address.
+```XML
+<marker address='Thérain, france' ... >
+```
+Geocoder is an ansynchonous service, so while it makes it easy to plot fuzzy addresses it can slow down the loading of your map. This is where you set the second parameter of the "BuildGoogleMap" function to true.
+```Javascript
+jQuery('#myMap').buildGoogleMap('my-map.xml', true, marker_onClick );
+```
+The second parameters tells jQMaps to attempt to write all of your marker address info out in latitude and longitude to your developer console (be sure to turn this off when you go live). This way you can copy the LatLong info into your marker and get rid of the address attribute which should speed up the map load time.
+
+####Marker pin look
+
 jQMaps gives you three ways of setting up the look of your marker:
 
-####Pre-configured markers
+#####Pre-configured markers
 
 Pre-configured markers are the marker types your setup in your jQMaps XML. The idea here might be that you map is highlighting a number of types of locations. So you need to setup different types of marker art and associated those marker types with your list of markers.
 
@@ -139,7 +165,7 @@ Now you need to apply these marker types to a marker:
 ```
 In the &lt;markers&gt; child nodes you create a new &lt;marker&gt; node and set it's "type" attribute to an above pin "name" which tells jQMaps to use that art for this marker.
 
-####Numeric markers
+#####Numeric markers
 
 Numeric markers are creates by the Google Charts API. In this case the syntax for setting up a Numeric marker changes.
 ```XML
@@ -152,7 +178,7 @@ Setting the attribute "type" to "number" you are telling jQMaps to use the chart
 ```
 The value of the marker is not constrained to being a numeric value. You can read more about the [chart dynamic icons](https://developers.google.com/chart/image/docs/gallery/dynamic_icons).
 
-####Custom markers
+#####Custom markers
 
 And custom markers let you specify specific pin graphics on a marker-by-marker basis.
 
