@@ -14,9 +14,8 @@
   var pinTypes = new Array();
 
   jQuery.fn.buildGoogleMap = function( builderSettings ){
-    // mapXML, debugMarkers, thisCallbackFunction, thisMapStyle, thisStyleName
-    // parameters: map - XML file, markerDebug - Boolean, callbackFunction - function name,
-    //             mapStyle - JSON config for style, styleName - string containing style name
+    // builderSettings properties: map - XML file, markerDebug - Boolean, callbackFunction - function name,
+    //                             mapStyle - JSON config for style, styleName - string containing style name
     if( typeof builderSettings.debugMarkers != 'undefined') debugPins = builderSettings.debugMarkers;
     if( typeof builderSettings.mapStyle != 'undefined' ){
       if( typeof builderSettings.styleName != 'undefined' ){
