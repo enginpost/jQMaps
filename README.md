@@ -206,8 +206,3 @@ Now that you have your style setup, pass it to the "buildGoogleMaps" function:
 ```Javascript
 jQuery('#myMap').buildGoogleMap('my-map.xml', true, marker_onClick, myMapStyle, styleName );
 ```
-
-```XML
-<marker lat='40.346282' lng='-74.653108' ... >
-```
-Adding 'lat' and 'lng' attributes with their values lets jQMaps pot your pin by that location.
