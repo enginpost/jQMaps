@@ -85,7 +85,7 @@ You can create any XML nodes you need under &lt;marker_data&gt; but the nodes ca
   </div>
   <script type="text/javascript">
     jQuery(document).ready(function(){
-      jQuery('#myMap').buildGoogleMap('my-map.xml', false, marker_onClick );
+      jQuery('#myMap').buildGoogleMap({'map':'my-map.xml','markerDebug': true, 'callbackFunction': marker_onClick } );
     });
     function marker_onClick(){
       jQuery('#mapMessage #title').html(this.marker_data.title);
@@ -119,7 +119,7 @@ You can also use a specific (i.e. "1600 Pennsylvania Ave, Washington, D.C. 20006
 ```
 Geocoder is an ansynchonous service, so while it makes it easy to plot fuzzy addresses it can slow down the loading of your map. This is where you set the second parameter of the "BuildGoogleMap" function to true.
 ```Javascript
-jQuery('#myMap').buildGoogleMap('my-map.xml', true, marker_onClick );
+jQuery('#myMap').buildGoogleMap({'map':'my-map.xml','markerDebug': true, 'callbackFunction': marker_onClick } );
 ```
 The second parameters tells jQMaps to attempt to write all of your marker address info out in latitude and longitude to your developer console (be sure to turn this off when you go live). This way you can copy the LatLong info into your marker and get rid of the address attribute which should speed up the map load time.
 
@@ -205,5 +205,5 @@ First, visit the google maps wizard (which takes a while to load) and learn how 
 
 Now that you have your style setup, pass it to the "buildGoogleMaps" function:
 ```Javascript
-jQuery('#myMap').buildGoogleMap('my-map.xml', true, marker_onClick, myMapStyle, styleName );
+jQuery('#myMap').buildGoogleMap({'map':'my-map.xml','markerDebug': true, 'callbackFunction': marker_onClick, 'mapStyle': myMapStyle, 'styleName': styleName } );
 ```
