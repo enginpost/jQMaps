@@ -17,9 +17,9 @@ Here was my use-case:
 
 And I have other goals:
 
-- [ ] To make the callback function optional, for a non-interactive map.
-- [ ] To allow markers to specify their address as a traditional address and not latitude and longitude.
-- [ ] To optionally print out latitude and longitude info to the browser console if the marker initially specified a traditional address (so site authors can update their markers with correct lat and long info rather than take the time to have jQMaps look it up on each page render).
+- [x] To make the callback function optional, for a non-interactive map. (added on: 7/27/2013)
+- [x] To allow markers to specify their address as a traditional address and not latitude and longitude. (added on: 7/27/2013)
+- [x] To optionally print out latitude and longitude info to the browser console if the marker initially specified a traditional address (so site authors can update their markers with correct lat and long info rather than take the time to have jQMaps look it up on each page render). (added on: 7/27/2013)
 - [ ] To optionally add "distance from map center" information to a marker's &lt;marker_data&gt; for the click event.
 - [ ] To add attribute to JSON conversion for &lt;marker_data&gt; in the XML (right now marker data is node-only).
 
