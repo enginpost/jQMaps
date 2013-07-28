@@ -192,7 +192,7 @@ And custom markers let you specify specific pin graphics on a marker-by-marker b
 
 The final two optional parameters of the "buildGoogleMap" function allow you to create a custom aesthetic look for the embedded Google map. The two steps of creating and setting up your custom map look are:
 
-####Google styled maps wizard
+1- Google styled maps wizard
 [The Google Map Style Wizard](http://gmaps-samples-v3.googlecode.com/svn/trunk/styledmaps/wizard/index.html)
 
 First, visit the google maps wizard (which takes a while to load) and learn how to fiddle with different maps layer looks. Once you have a look you prefer, click the "Show JSON" button under Map Styles in the right panel and copy that into a variable in your Web page along with a variable to hold the name of your map style.
@@ -201,7 +201,7 @@ First, visit the google maps wizard (which takes a while to load) and learn how 
   var styleName = "Planet Princeton";
 ```
 
-####Pass the optional Style and style name parameters to jQMaps
+2- Pass the optional Style and style name parameters to jQMaps
 Now that you have your style setup, pass it to the "buildGoogleMaps" function:
 ```Javascript
 jQuery('#myMap').buildGoogleMap('my-map.xml', true, marker_onClick, myMapStyle, styleName );
