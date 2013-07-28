@@ -96,6 +96,7 @@ You can create any XML nodes you need under &lt;marker_data&gt; but the nodes ca
 ```
 In the above example a google map would be loaded with a single marker and when the visitor clicks the marker the local function "marker_onClick" would be called and the marker_data attached to the marker would update the map message area of the screen using jQuery. You can see here how your marker_data child nodes are converted to JSON and attached to your marker in the click event (the marker you clicked would be refered to as "this" in the event context).
 
+
 ###Other features: Marker options
 
 ####Marker location
@@ -186,3 +187,26 @@ And custom markers let you specify specific pin graphics on a marker-by-marker b
 <marker lat='40.349937' lng='-74.663156' type='custom' icon='custom.png' shadow=''>
 ```
 *Make note that the shadow attribute is always optional.*
+
+###Other features: Map style
+
+The final two optional parameters of the "buildGoogleMap" function allow you to create a custom aesthetic look for the embedded Google map. The two steps of creating and setting up your custom map look are:
+
+####Google styled maps wizard
+(http://gmaps-samples-v3.googlecode.com/svn/trunk/styledmaps/wizard/index.html)
+First, visit the google maps wizard (which takes a while to load) and learn how to fiddle with different maps layer looks. Once you have a look you prefer, click the "Show JSON" button under Map Styles in the right panel and copy that into a variable in your Web page along with a variable to hold the name of your map style.
+```Javascript
+  var myMapStyle = [ { "featureType": "landscape", "stylers": [ { "visibility": "on" }, { "weight": 0.1 }, { "saturation": 200 }, { "hue": "#ffaa00" } ] },{ "featureType": "water", "stylers": [ { "hue": "#00bbff" }, { "lightness": 30 }, { "gamma": 0.6 } ] } ];
+  var styleName = "Planet Princeton";
+```
+
+####Pass the optional Style and style name parameters to jQMaps
+Now that you have your style setup, pass it to the "buildGoogleMaps" function:
+```Javascript
+jQuery('#myMap').buildGoogleMap('my-map.xml', true, marker_onClick, myMapStyle, styleName );
+```
+
+```XML
+<marker lat='40.346282' lng='-74.653108' ... >
+```
+Adding 'lat' and 'lng' attributes with their values lets jQMaps pot your pin by that location.
