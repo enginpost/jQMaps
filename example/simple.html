@@ -10,37 +10,21 @@
   </head>
   <body>
 
-    <div id="mapwrapper" style="display:block;position:relative;width:1200px;height:550px;overflow:hidden;border-radius:10px;border: 2px solid #000;">
-      <div id="myMap"></div>
-      <div id="mapcaption" style="display:block;position:absolute;bottom:-30px;left:0;width:100%;text-align:center;z-index:200;">
-        <span style="padding:10px 10px 20px 10px;background-color:rgba(51, 51, 51,.7);border-radius:10px;color:#fff;">caption will go here</span>
-      </div>
-    </div>
+    <div id="myMap"></div>
     <div id="mapMessage">
       <h2 id="title"></h2>
       <p id="description"></p>
     </div>
     <script type="text/javascript">
-      //Settings for a custom map style
+      //get styles from: http://gmaps-samples-v3.googlecode.com/svn/trunk/styledmaps/wizard/index.html
       var myMapStyle = [ { "featureType": "landscape", "stylers": [ { "visibility": "on" }, { "weight": 0.1 }, { "saturation": 200 }, { "hue": "#ffaa00" } ] },{ "featureType": "water", "stylers": [ { "hue": "#00bbff" }, { "lightness": 30 }, { "gamma": 0.6 } ] } ];
       var styleName = "Planet Princeton";
-
-      //Setup the map
       jQuery(document).ready(function(){
-        jQuery('#myMap').buildGoogleMap({'map':'my-map.xml','markerDebug': true, 'click': marker_onClick, 'mouseover': marker_onMouseOver, 'mouseout': marker_onMouseOut, 'mapStyle': myMapStyle, 'styleName': styleName }, function(thisMap){
-            //alert("Map is loaded");
-        });
+        jQuery('#myMap').buildGoogleMap({'map':'my-map.xml','markerDebug': true, 'click': marker_onClick, 'mapStyle': myMapStyle, 'styleName': styleName });
       });
       function marker_onClick(){
         jQuery('#mapMessage #title').html(this.marker_data.title);
         jQuery('#mapMessage #description').html(this.marker_data.description);
-      }
-      function marker_onMouseOver(){
-        jQuery('#mapcaption span').html(this.marker_data.hover_caption);
-        jQuery('#mapcaption').animate({'bottom':'10px'});
-      }
-      function marker_onMouseOut(){
-        jQuery('#mapcaption').animate({'bottom':'-30px'});
       }
     </script>
 

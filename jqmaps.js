@@ -1,5 +1,6 @@
 (function ( $ ) {
 
+  var mapID;
   var thisMap;
   var mapStyle;
   var mapZoomFit = false;
@@ -8,14 +9,19 @@
   var debugPins = false;
   var pinCount = 0;
   var tempMarkers = [];
-  var callbackFunction;
+  var clickFunction;
+  var mouseoverFunction;
+  var mouseoutFunction;
+  var readyCallBackFunction;
   var animationMarker;
   var animationTimeout = null;
   var pinTypes = new Array();
 
-  jQuery.fn.buildGoogleMap = function( builderSettings ){
-    // builderSettings properties: map - XML file, markerDebug - Boolean, callbackFunction - function name,
+  jQuery.fn.buildGoogleMap = function( builderSettings, thisReadyCallBackFunction ){
+    // builderSettings properties: map - XML file, markerDebug - Boolean, click - function name,
+    //                             mouseover = function name, mouseout = function name,
     //                             mapStyle - JSON config for style, styleName - string containing style name
+    if( typeof thisReadyCallBackFunction != 'undefined' ) readyCallBackFunction = thisReadyCallBackFunction;
     if( typeof builderSettings.debugMarkers != 'undefined') debugPins = builderSettings.debugMarkers;
     if( typeof builderSettings.mapStyle != 'undefined' ){
       if( typeof builderSettings.styleName != 'undefined' ){
@@ -25,10 +31,17 @@
       }
 
     }
-    if( typeof builderSettings.callbackFunction != 'undefined' ){
-      callbackFunction = builderSettings.callbackFunction;
+    if( typeof builderSettings.click != 'undefined' ){
+      clickFunction = builderSettings.click;
+    }
+    if( typeof builderSettings.mouseover != 'undefined' ){
+      mouseoverFunction = builderSettings.mouseover;
+    }
+    if( typeof builderSettings.mouseout != 'undefined' ){
+      mouseoutFunction = builderSettings.mouseout;
     }
     var _this = this;
+    mapID = jQuery(this).attr('id');
 
     jQuery.ajax({
       type: 'GET',
@@ -43,6 +56,8 @@
           data = removeWhitespace( data );
           setupPinTypes( jQuery( data ).find( 'jqmap config pins' ) );
           thisMap = setupMap( _this, data );
+          //google.maps.event.addListenerOnce( thisMap, 'idle', mapFullyLoaded );
+          google.maps.event.addListenerOnce(thisMap, 'tilesloaded', mapFullyLoaded );
           if( typeof mapStyle != 'undefined' ){
             thisMap.mapTypes.set('map_style',mapStyle);
             thisMap.setMapTypeId('map_style');
@@ -132,20 +147,32 @@
           thisPin = {
             'icon': 'http://chart.apis.google.com/chart?chst=d_map_spin&chld=' + jQuery( currentPin ).attr('icon'),
             'shadow': '' };
-          break
+          break;
         default:
           thisPin = pinTypes[ jQuery( currentPin ).attr( 'type' ) ];
           break;
       }
-      var markerPin = new google.maps.Marker({
+      var markerOptions = {
         position: thisMarker,
         map: thisMap,
+        optimized: false,
         draggable:false,
         icon: thisPin.icon,
         shadow: thisPin.shadow
-      });
+      };
+      var pinTitle = jQuery( currentPin ).attr( 'title' );
+      if( typeof pinTitle != 'undefined' || pinTitle != "") markerOptions['title'] = pinTitle;
+      var markerPin = new google.maps.Marker( markerOptions );
       markerPin.marker_data = convertXMLtoJSON(jQuery( currentPin ).find( 'marker_data' ).get(0));
-      if( typeof callbackFunction != 'undefined') google.maps.event.addListener(markerPin, 'click', callbackFunction);
+      if( typeof clickFunction != 'undefined' ){
+        google.maps.event.addListener(markerPin, 'click', clickFunction);
+      }
+      if( typeof mouseoverFunction != 'undefined' ){
+        google.maps.event.addListener(markerPin, 'mouseover', mouseoverFunction);
+      }
+      if( typeof mouseoutFunction != 'undefined' ){
+        google.maps.event.addListener(markerPin, 'mouseout', mouseoutFunction);
+      }
       if( animatePins ){
         google.maps.event.addListener(markerPin, 'mouseup', function(){
           if( typeof animationMarker != 'undefined'){
@@ -204,6 +231,10 @@
         if (!(/\S/.test(currentNode.nodeValue)) && (currentNode.nodeType == 3)) xml.removeChild(xml.childNodes[loopIndex--]);
       }
       return xml;
+    }
+
+    function mapFullyLoaded(){
+      if( typeof readyCallBackFunction != 'undefined') readyCallBackFunction( thisMap );
     }
 
     return _this;

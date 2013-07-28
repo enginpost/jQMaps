@@ -8,7 +8,7 @@
     </pins>
   </config>
   <markers>
-    <marker address='22 chambers st, princeton, nj' type='custom' icon='custom.png' shadow=''>
+    <marker title="Office of Communications" address='22 chambers st, princeton, nj' type='custom' icon='custom.png' shadow=''>
       <marker_data>
         <title><![CDATA[Office of Communications]]></title>
         <description>
@@ -17,9 +17,10 @@
           Princeton, NJ 08540
           ]]>
         </description>
+        <hover_caption><![CDATA[Princeton University: Office of Communications]]></hover_caption>
       </marker_data>
     </marker>
-    <marker lat='40.348907' lng='-74.659342' type='school'>
+    <marker title="Old Nassau" lat='40.348907' lng='-74.659342' type='school'>
       <marker_data>
         <title><![CDATA[Nassau Hall]]></title>
         <description>
@@ -27,6 +28,7 @@
           Oldest building at Princeton University.
           ]]>
         </description>
+        <hover_caption><![CDATA[Nassau Hall, just south of the center of Nassau Street]]></hover_caption>
       </marker_data>
     </marker>
     <marker lat='40.346282' lng='-74.653108' type='number' icon='.9|0|FA7F00|11|b|180'>
@@ -37,9 +39,10 @@
           Lewis Library on the Princeton University campus.
           ]]>
         </description>
+        <hover_caption><![CDATA[The Lewis Center is a recent addition to the campus]]></hover_caption>
       </marker_data>
     </marker>
-    <marker lat='40.342701' lng='-74.653645' type='sports'>
+    <marker title="" lat='40.342701' lng='-74.653645' type='sports'>
       <marker_data>
         <title><![CDATA[Roberts Stadium]]></title>
         <description>
@@ -47,6 +50,7 @@
           Sports venue on the south end of the University campus.
           ]]>
         </description>
+        <hover_caption><![CDATA[Large sports venue visible from Washington Road]]></hover_caption>
       </marker_data>
     </marker>
   </markers>
