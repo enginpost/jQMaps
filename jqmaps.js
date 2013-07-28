@@ -13,24 +13,27 @@
   var animationTimeout = null;
   var pinTypes = new Array();
 
-  jQuery.fn.buildGoogleMap = function( mapXML, debugMarkers, thisCallbackFunction, thisMapStyle, thisStyleName ) {
-    if( typeof debugMarkers != 'undefined') debugPins = debugMarkers;
-    if( typeof thisMapStyle != 'undefined' ){
-      if( typeof thisStyleName != 'undefined' ){
-        mapStyle = new google.maps.StyledMapType( thisMapStyle, {name: thisStyleName });
+  jQuery.fn.buildGoogleMap = function( builderSettings ){
+    // mapXML, debugMarkers, thisCallbackFunction, thisMapStyle, thisStyleName
+    // parameters: map - XML file, markerDebug - Boolean, callbackFunction - function name,
+    //             mapStyle - JSON config for style, styleName - string containing style name
+    if( typeof builderSettings.debugMarkers != 'undefined') debugPins = builderSettings.debugMarkers;
+    if( typeof builderSettings.mapStyle != 'undefined' ){
+      if( typeof builderSettings.styleName != 'undefined' ){
+        mapStyle = new google.maps.StyledMapType( builderSettings.mapStyle, {name: builderSettings.styleName });
       }else{
-        mapStyle = new google.maps.StyledMapType( thisMapStyle, {name: "World Map"});
+        mapStyle = new google.maps.StyledMapType( builderSettings.mapStyle, {name: "World Map"});
       }
 
     }
-    if( typeof thisCallbackFunction != 'undefined' ){
-      callbackFunction = thisCallbackFunction;
+    if( typeof builderSettings.callbackFunction != 'undefined' ){
+      callbackFunction = builderSettings.callbackFunction;
     }
     var _this = this;
 
     jQuery.ajax({
       type: 'GET',
-      url: mapXML, // your xml file
+      url: builderSettings.map, // your xml file
       dataType: (navigator.appName == 'Microsoft Internet Explorer') ? "text" : "xml", // text for IE, xml for the rest
       success: function(data) {
           if (navigator.appName == 'Microsoft Internet Explorer') {
