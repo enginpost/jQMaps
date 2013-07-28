@@ -20,7 +20,7 @@
       var myMapStyle = [ { "featureType": "landscape", "stylers": [ { "visibility": "on" }, { "weight": 0.1 }, { "saturation": 200 }, { "hue": "#ffaa00" } ] },{ "featureType": "water", "stylers": [ { "hue": "#00bbff" }, { "lightness": 30 }, { "gamma": 0.6 } ] } ];
       var styleName = "Planet Princeton";
       jQuery(document).ready(function(){
-        jQuery('#myMap').buildGoogleMap('my-map.xml', marker_onClick, myMapStyle, styleName );
+        jQuery('#myMap').buildGoogleMap('my-map.xml', true, marker_onClick, myMapStyle, styleName );
       });
       function marker_onClick(){
         jQuery('#mapMessage #title').html(this.marker_data.title);

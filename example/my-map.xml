@@ -8,7 +8,7 @@
     </pins>
   </config>
   <markers>
-    <marker lat='40.349937' lng='-74.663156' type='custom' icon='custom.png' shadow=''>
+    <marker address='22 chambers st, princeton, nj' type='custom' icon='custom.png' shadow=''>
       <marker_data>
         <title><![CDATA[Office of Communications]]></title>
         <description>

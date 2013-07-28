@@ -5,10 +5,16 @@
   var mapZoomFit = false;
   var animatePins = false;
   var mapBounds = new google.maps.LatLngBounds ();
+  var debugPins = false;
+  var pinCount = 0;
+  var tempMarkers = [];
   var callbackFunction;
+  var animationMarker;
+  var animationTimeout = null;
   var pinTypes = new Array();
 
-  jQuery.fn.buildGoogleMap = function( mapXML, thisCallbackFunction, thisMapStyle, thisStyleName ) {
+  jQuery.fn.buildGoogleMap = function( mapXML, debugMarkers, thisCallbackFunction, thisMapStyle, thisStyleName ) {
+    if( typeof debugMarkers != 'undefined') debugPins = debugMarkers;
     if( typeof thisMapStyle != 'undefined' ){
       if( typeof thisStyleName != 'undefined' ){
         mapStyle = new google.maps.StyledMapType( thisMapStyle, {name: thisStyleName });
@@ -17,8 +23,9 @@
       }
 
     }
-
-    callbackFunction = thisCallbackFunction;
+    if( typeof thisCallbackFunction != 'undefined' ){
+      callbackFunction = thisCallbackFunction;
+    }
     var _this = this;
 
     jQuery.ajax({
@@ -55,6 +62,7 @@
       var mapCenter = new google.maps.LatLng( jQuery(thisData).find('jqmap config map').attr('center_lat'), jQuery(thisData).find('jqmap config map').attr('center_lng') );
       var mapSettings = {
         center: mapCenter,
+        draggable:true,
         mapTypeControl: true,
         mapTypeControlOptions: {style: google.maps.MapTypeControlStyle.DROPDOWN_MENU, mapTypeIds: [google.maps.MapTypeId.ROADMAP, 'map_style']},
         navigationControl: true,
@@ -89,41 +97,72 @@
     }
 
     function addPins( thesePins ){
+      var geocoder = new google.maps.Geocoder();
+      pinCount = jQuery( thesePins ).find( 'marker' ).length;
       jQuery( thesePins ).find( 'marker' ).each( function( i ){
-        var thisMarker = new google.maps.LatLng( jQuery( this ).attr( 'lat' ), jQuery( this ).attr( 'lng' ) );
-        mapBounds.extend( thisMarker );
-        var thisPin;
-        switch( jQuery( this ).attr('type') ){
-          case "custom" :
-            thisPin = {'icon': jQuery( this ).attr('icon'), 'shadow': jQuery( this ).attr('shadow') };
-            break;
-          case "number" :
-            // https://developers.google.com/chart/image/docs/gallery/dynamic_icons
-            // <scale_factor>|<rotation_deg>|<fill_color>|<font_size>|<font_style>|<text_line_1>|...|<text_line_5>
-            thisPin = {
-              'icon': 'http://chart.apis.google.com/chart?chst=d_map_spin&chld=' + jQuery( this ).attr('icon'),
-              'shadow': '' };
-            break
-          default:
-            thisPin = pinTypes[ jQuery( this ).attr( 'type' ) ];
-            break;
-        }
-        var markerPin = new google.maps.Marker({
-          position: thisMarker,
-          map: thisMap,
-          icon: thisPin.icon,
-          shadow: thisPin.shadow
-        });
-        markerPin.marker_data = convertXMLtoJSON(jQuery( this ).find( 'marker_data' ).get(0));
-        google.maps.event.addListener(markerPin, 'click', callbackFunction);
-        if( animatePins ){
-          google.maps.event.addListener(markerPin, 'mouseup', function(){
-            _thisMarker = this;
-            _thisMarker.setAnimation(google.maps.Animation.BOUNCE);
-            setTimeout(function(){_thisMarker.setAnimation(null);},1400);
+        var thisPin = this;
+        var address = jQuery( thisPin ).attr( 'address' );
+        if( typeof address != 'undefined' && address !== false){
+          geocoder.geocode( { 'address': address }, function( result, status ) {
+            if ( status == google.maps.GeocoderStatus.OK ){
+              jQuery( thisPin ).attr('lat', result[0].geometry.location.jb);
+              jQuery( thisPin ).attr('lng', result[0].geometry.location.kb);
+              buildPin( thisPin );
+            }
           });
+        }else{
+          buildPin( thisPin );
         }
       });
+    }
+
+    function buildPin( currentPin ){
+      var thisMarker = new google.maps.LatLng( jQuery( currentPin ).attr( 'lat' ), jQuery( currentPin ).attr( 'lng' ) );
+      mapBounds.extend( thisMarker );
+      var thisPin;
+      switch( jQuery( currentPin ).attr('type') ){
+        case "custom" :
+          thisPin = {'icon': jQuery( currentPin ).attr('icon'), 'shadow': jQuery( currentPin ).attr('shadow') };
+          break;
+        case "number" :
+          // https://developers.google.com/chart/image/docs/gallery/dynamic_icons
+          // <scale_factor>|<rotation_deg>|<fill_color>|<font_size>|<font_style>|<text_line_1>|...|<text_line_5>
+          thisPin = {
+            'icon': 'http://chart.apis.google.com/chart?chst=d_map_spin&chld=' + jQuery( currentPin ).attr('icon'),
+            'shadow': '' };
+          break
+        default:
+          thisPin = pinTypes[ jQuery( currentPin ).attr( 'type' ) ];
+          break;
+      }
+      var markerPin = new google.maps.Marker({
+        position: thisMarker,
+        map: thisMap,
+        draggable:false,
+        icon: thisPin.icon,
+        shadow: thisPin.shadow
+      });
+      markerPin.marker_data = convertXMLtoJSON(jQuery( currentPin ).find( 'marker_data' ).get(0));
+      if( typeof callbackFunction != 'undefined') google.maps.event.addListener(markerPin, 'click', callbackFunction);
+      if( animatePins ){
+        google.maps.event.addListener(markerPin, 'mouseup', function(){
+          if( typeof animationMarker != 'undefined'){
+            animationMarker.setAnimation(null);
+            clearTimeout( animationTimeout );
+          }
+          animationMarker = this;
+          animationMarker.setAnimation(google.maps.Animation.BOUNCE);
+          animationTimeout = setTimeout(function(){animationMarker.setAnimation(null);},1400);
+        });
+      }
+      pinCount--;
+      if( debugPins === true ){
+        tempMarkers.push({'lat':jQuery( currentPin ).attr( 'lat' ),'lng':jQuery( currentPin ).attr( 'lng' ),'marker_data':markerPin.marker_data});
+        if( pinCount < 1 ){
+          if(typeof console === "undefined") { var console = { log: function (logMsg) { } }; }
+          console.log( tempMarkers );
+        }
+      }
     }
 
     function convertXMLtoJSON( pinData ){
