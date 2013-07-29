@@ -17,7 +17,9 @@ Here was my use-case:
 
 And I have other goals:
 
-- [x] To make the callback function optional, for a non-interactive map. (added on: 7/27/2013)
+- [x] To make marker event functions optional, for a non-interactive map. (added on: 7/27/2013)
+- [x] To support a number of marker events: click, mouseover, mouseout. (added on: 7/28/2013)
+- [x] To add a callback function that fires once the map is painted to the screen. (added on: 7/28/2013)
 - [x] To allow markers to specify their address as a traditional address and not latitude and longitude. (added on: 7/27/2013)
 - [x] To optionally print out latitude and longitude info to the browser console if the marker initially specified a traditional address (so site authors can update their markers with correct lat and long info rather than take the time to have jQMaps look it up on each page render). (added on: 7/27/2013)
 - [ ] To optionally add "distance from map center" information to a marker's &lt;marker_data&gt; for the click event.
@@ -85,7 +87,7 @@ You can create any XML nodes you need under &lt;marker_data&gt; but the nodes ca
   </div>
   <script type="text/javascript">
     jQuery(document).ready(function(){
-      jQuery('#myMap').buildGoogleMap({'map':'my-map.xml','markerDebug': true, 'callbackFunction': marker_onClick } );
+      jQuery('#myMap').buildGoogleMap({'map':'my-map.xml','markerDebug': false, 'click': marker_onClick } );
     });
     function marker_onClick(){
       jQuery('#mapMessage #title').html(this.marker_data.title);
@@ -96,6 +98,31 @@ You can create any XML nodes you need under &lt;marker_data&gt; but the nodes ca
 ```
 In the above example a google map would be loaded with a single marker and when the visitor clicks the marker the local function "marker_onClick" would be called and the marker_data attached to the marker would update the map message area of the screen using jQuery. You can see here how your marker_data child nodes are converted to JSON and attached to your marker in the click event (the marker you clicked would be refered to as "this" in the event context).
 
+###Other features:Map and marker events
+
+####Marker events
+
+At the moment there are a total of three mouse events that can be associated with a marker:
+
+- **mouse click**: This event fires when a mouse clicks on a marker.
+- **mouse over**: This event fires when a mouse rolls over a marker.
+- **mouse out**: This event fires when a mouse rolls out from being over a marker.
+
+You write functions to handle those events and associate them by passing them into the "buildGoogleMap" function
+```Javascript
+jQuery('#myMap').buildGoogleMap({'map':'my-map.xml','markerDebug': false, 'click': marker_onClick, 'mouseover': marker_onMouseOver, 'mouseout': marker_onMouseOut } );
+```
+
+####Map events
+
+In some cases you may want to know when a map is painted onto the screen. To achieve this I am waiting for the first time all of the map tiles paint into the display. Although they continue to repaint each time the zoom level changes on a Google Map, I am only firing the event the first time.
+
+To hook into this event you need to add a function as the second optional parameter to the "buildGoogleMap" function:
+```Javascript
+jQuery('#myMap').buildGoogleMap({'map':'my-map.xml'}, function(thisMap){ 
+  alert("The map is now loaded and visible!");
+});
+```
 
 ###Other features: Marker options
 
@@ -117,9 +144,9 @@ You can also use a specific (i.e. "1600 Pennsylvania Ave, Washington, D.C. 20006
 ```XML
 <marker address='Thérain, france' ... >
 ```
-Geocoder is an ansynchonous service, so while it makes it easy to plot fuzzy addresses it can slow down the loading of your map. This is where you set the second parameter of the "BuildGoogleMap" function to true.
+Geocoder is an ansynchonous service, so while it makes it easy to plot fuzzy addresses it can slow down the loading of your map. This is where you set the second parameter of the "BuildGoogleMap" function, "markerDebug" to true.
 ```Javascript
-jQuery('#myMap').buildGoogleMap({'map':'my-map.xml','markerDebug': true, 'callbackFunction': marker_onClick } );
+jQuery('#myMap').buildGoogleMap({'map':'my-map.xml','markerDebug': true, 'click': marker_onClick } );
 ```
 The second parameters tells jQMaps to attempt to write all of your marker address info out in latitude and longitude to your developer console (be sure to turn this off when you go live). This way you can copy the LatLong info into your marker and get rid of the address attribute which should speed up the map load time.
 
