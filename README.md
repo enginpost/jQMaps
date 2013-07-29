@@ -164,8 +164,8 @@ Example marker type setup in jQMaps XML:
 <jqmap>
   <config>
     <map zoom='fit' center_lat='40.348637' center_lng='-74.658365' width='1200' height='550' />
-    <pins **animate='true'**>
-      **<pin name='office' icon='office.png' shadow='' />**
+    <pins animate='true'>
+      <pin name='office' icon='office.png' shadow='' />
       <pin name='school' icon='school.png' shadow='' />
       <pin name='sports' icon='sports.png' shadow='' />
     </pins>
