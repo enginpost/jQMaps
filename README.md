@@ -28,12 +28,13 @@ And I have other goals:
 So far I have tested the plugin and it works under all recent copies of FireFox, Chrome, Safari and IE 6 through 10.
 
 -------------------
-##Contents
+##Example contents
 
 - jQMaps.js: The plugin where all of the action happens.
 - Example folder: This is an example which demonstrates all of the current features.
-  - index.html: Sample HTML file showing how to use jQMaps.
-  - my-map.xml: Demonstrates the expected XML jQMaps needs to create your Google Map plugin
+  - Simple.html: Sample HTML file showing a few simple features for how to get started.
+  - Complex.html: Sample HTML file showing a more complex array of features for jQMaps.
+  - my-map.xml: Demonstrates the expected XML jQMaps needs to create your Google Map plugin.
   - *.PNG: The PNG files demonstrate both the ability to setup preconfigured marker pinTypes, custom markers as well as dynamic markers.
 
 *The example references both JQuery and the Google Maps API through their respective CDNs.*
