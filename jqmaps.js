@@ -22,7 +22,7 @@
     //                             mouseover = function name, mouseout = function name,
     //                             mapStyle - JSON config for style, styleName - string containing style name
     if( typeof thisReadyCallBackFunction != 'undefined' ) readyCallBackFunction = thisReadyCallBackFunction;
-    if( typeof builderSettings.debugMarkers != 'undefined') debugPins = builderSettings.debugMarkers;
+    if( typeof builderSettings.markerDebug != 'undefined') debugPins = builderSettings.markerDebug;
     if( typeof builderSettings.mapStyle != 'undefined' ){
       if( typeof builderSettings.styleName != 'undefined' ){
         mapStyle = new google.maps.StyledMapType( builderSettings.mapStyle, {name: builderSettings.styleName });
@@ -188,7 +188,7 @@
       if( debugPins === true ){
         tempMarkers.push({'lat':jQuery( currentPin ).attr( 'lat' ),'lng':jQuery( currentPin ).attr( 'lng' ),'marker_data':markerPin.marker_data});
         if( pinCount < 1 ){
-          if(typeof console === "undefined") { var console = { log: function (logMsg) { } }; }
+          if(typeof console === "undefined") { console = { log: function (logMsg) { } }; }
           console.log( tempMarkers );
         }
       }
